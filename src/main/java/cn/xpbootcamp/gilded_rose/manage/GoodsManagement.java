@@ -10,12 +10,24 @@ public class GoodsManagement {
             case COMMON_GOODS:
                 goods =  manageCommonGoods(goods);
                 break;
+            case AGED_BRIE:
+                goods = manageAgedBrie(goods);
+                break;
 
             default:
                 break;
 
         }
         return goods;
+    }
+
+    private Goods manageAgedBrie(Goods agedBrieGoods) {
+        Integer quality = agedBrieGoods.getQuality();
+        Integer passedDays = agedBrieGoods.getPassedDays();
+        Integer decreaseSpeed = agedBrieGoods.getDecreaseSpeed();
+        quality = quality - decreaseSpeed * passedDays;
+        agedBrieGoods.setQuality(quality > 50 ? 50 : (quality < 0 ? 0 : quality));
+        return agedBrieGoods;
     }
 
     private Goods manageCommonGoods(Goods commonGoods) {

@@ -9,7 +9,7 @@ public class GoodsManagementTest {
     private GoodsManagement goodsManagement = new GoodsManagement();
 
     @Test
-    public void should_decreased_goods_info_normally_when_remain_sellin_above_zero_given_common_goods_information() {
+    public void should_decreased_quality_normally_when_remain_sellin_above_zero_given_common_goods_information() {
         // given
         Goods goods = new Goods(50, 100, 40, 1);
 
@@ -24,7 +24,7 @@ public class GoodsManagementTest {
     }
 
     @Test
-    public void should_decreased_goods_info_normally_when_remain_sellin_below_zero_given_common_goods_information() {
+    public void should_decreased_quality_normally_when_remain_sellin_below_zero_given_common_goods_information() {
         // given
         Goods goods = new Goods(50, 100, 60, 1);
 
@@ -36,5 +36,31 @@ public class GoodsManagementTest {
         Integer expectSellIn = -10;
         Assertions.assertEquals(expectQuality, actualResult.getQuality());
         Assertions.assertEquals(expectSellIn, actualResult.getSellIn());
+    }
+
+    @Test
+    public void should_increased_quality_normally_when_quality_below_50_given_aged_brie_goods_information() {
+        // given
+        Goods goods = new Goods(Integer.MAX_VALUE, 10, 10, -1);
+
+        // when
+        Goods actualResult = goodsManagement.updateGoodsInfo(GoodsEnum.AGED_BRIE, goods);
+
+        // then
+        Integer expectQuality = 20;
+        Assertions.assertEquals(expectQuality, actualResult.getQuality());
+    }
+
+    @Test
+    public void should_quality_be_50_when_quality_above_50_given_aged_brie_goods_information() {
+        // given
+        Goods goods = new Goods(Integer.MAX_VALUE, 10, 60, -1);
+
+        // when
+        Goods actualResult = goodsManagement.updateGoodsInfo(GoodsEnum.AGED_BRIE, goods);
+
+        // then
+        Integer expectQuality = 50;
+        Assertions.assertEquals(expectQuality, actualResult.getQuality());
     }
 }
