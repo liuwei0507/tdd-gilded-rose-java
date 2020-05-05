@@ -1,11 +1,12 @@
 package cn.xpbootcamp.gilded_rose.constant;
 
-public enum SpecialGoods {
+public enum GoodsEnum {
+    COMMON_GOODS("Common Goods"),
     AGED_BRIE("Aged Brie"),
     SULFURAS("Sulfuras"),
     BACKSTAGE_PASS("Backstage pass");
 
-    SpecialGoods(String name) {
+    GoodsEnum(String name) {
         this.name = name;
     }
 

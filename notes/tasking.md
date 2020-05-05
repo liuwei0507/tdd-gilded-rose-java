@@ -17,6 +17,10 @@ Quality
     
 # Stepping 
 1. define data class of the goods
-2. define enum class for the special goods   
+2. define enum class for the goods
+3. handle common goods sellin & quality
+    remain sellIn > 0
+    remain sellIn < 0  
+
 
 
