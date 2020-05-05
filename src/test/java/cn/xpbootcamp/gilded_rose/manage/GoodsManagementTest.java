@@ -63,4 +63,17 @@ public class GoodsManagementTest {
         Integer expectQuality = 50;
         Assertions.assertEquals(expectQuality, actualResult.getQuality());
     }
+
+    @Test
+    public void should_quality_not_change_when_given_Sulfuras_goods_information() {
+        // given
+        Goods goods = new Goods(null, 10, 10, 0);
+
+        // when
+        Goods actualResult = goodsManagement.updateGoodsInfo(GoodsEnum.SULFURAS, goods);
+
+        // then
+        Integer expectQuality = 10;
+        Assertions.assertEquals(expectQuality, actualResult.getQuality());
+    }
 }

@@ -13,6 +13,8 @@ public class GoodsManagement {
             case AGED_BRIE:
                 goods = manageAgedBrie(goods);
                 break;
+            case SULFURAS:
+                return goods;
 
             default:
                 break;
