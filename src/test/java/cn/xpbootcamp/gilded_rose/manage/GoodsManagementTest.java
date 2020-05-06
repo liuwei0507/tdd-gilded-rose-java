@@ -76,4 +76,67 @@ public class GoodsManagementTest {
         Integer expectQuality = 10;
         Assertions.assertEquals(expectQuality, actualResult.getQuality());
     }
+
+    @Test
+    public void should_increase_1_points_one_day_when_sellIn_above_10_given_Backstage_pass_goods_information() {
+        // given
+        Goods goods = new Goods(20, 10, 3, -1);
+
+        // when
+        Goods actualResult = goodsManagement.updateGoodsInfo(GoodsEnum.BACKSTAGE_PASS, goods);
+
+        // then
+        Integer expectQuality = 13;
+        Integer expectSellIn = 17;
+        Assertions.assertEquals(expectSellIn, actualResult.getSellIn());
+        Assertions.assertEquals(expectQuality, actualResult.getQuality());
+    }
+
+    @Test
+    public void should_increase_3_points_one_day_when_sellIn_below_10_above_5_given_Backstage_pass_goods_information() {
+        // given
+        Goods goods = new Goods(20, 10, 13, -1);
+
+        // when
+        Goods actualResult = goodsManagement.updateGoodsInfo(GoodsEnum.BACKSTAGE_PASS, goods);
+
+        // then
+        Integer expectQuality = 26;
+        Integer expectSellIn = 7;
+
+        Assertions.assertEquals(expectSellIn, actualResult.getSellIn());
+        Assertions.assertEquals(expectQuality, actualResult.getQuality());
+    }
+
+    @Test
+    public void should_increase_3_points_one_day_when_sellIn_below_5_above_0_given_Backstage_pass_goods_information() {
+        // given
+        Goods goods = new Goods(20, 10, 18, -1);
+
+        // when
+        Goods actualResult = goodsManagement.updateGoodsInfo(GoodsEnum.BACKSTAGE_PASS, goods);
+
+        // then
+        Integer expectQuality = 39;
+        Integer expectSellIn = 2;
+
+        Assertions.assertEquals(expectSellIn, actualResult.getSellIn());
+        Assertions.assertEquals(expectQuality, actualResult.getQuality());
+    }
+
+    @Test
+    public void should_quality_be_zero_when_sellIn_below_0_given_Backstage_pass_goods_information() {
+        // given
+        Goods goods = new Goods(20, 10, 21, -1);
+
+        // when
+        Goods actualResult = goodsManagement.updateGoodsInfo(GoodsEnum.BACKSTAGE_PASS, goods);
+
+        // then
+        Integer expectQuality = 0;
+        Integer expectSellIn = -1;
+
+        Assertions.assertEquals(expectSellIn, actualResult.getSellIn());
+        Assertions.assertEquals(expectQuality, actualResult.getQuality());
+    }
 }

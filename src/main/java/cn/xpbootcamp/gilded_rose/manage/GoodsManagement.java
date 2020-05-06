@@ -15,12 +15,34 @@ public class GoodsManagement {
                 break;
             case SULFURAS:
                 return goods;
+            case BACKSTAGE_PASS:
+                goods = manageBackstagePass(goods);
+                break;
 
             default:
                 break;
 
         }
         return goods;
+    }
+
+    private Goods manageBackstagePass(Goods backstagePass) {
+        Integer sellIn = backstagePass.getSellIn();
+        Integer quality = backstagePass.getQuality();
+        Integer passedDays = backstagePass.getPassedDays();
+
+        if (sellIn - passedDays > 10) {
+            quality = quality + passedDays;
+        } else if (sellIn - passedDays >= 5) {
+            quality = quality + 1 * (sellIn - 10) + 2 * (passedDays - (sellIn - 10));
+        } else if(sellIn - passedDays >= 0){
+            quality = quality + 1 * (sellIn - 10) + 2 * 5 + 3 * (passedDays - (sellIn - 10) - 5);
+        } else {
+            quality = 0;
+        }
+        backstagePass.setSellIn(sellIn - passedDays);
+        backstagePass.setQuality(quality > 50 ? 50 : (quality < 0 ? 0 : quality));
+        return backstagePass;
     }
 
     private Goods manageAgedBrie(Goods agedBrieGoods) {
